@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.example.moviesapplication.view_model.MovieDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.movie_detail.MovieDetailActivity">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{vm.dataMovieDetail.title}"/>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/video_trailer"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title"/>
+
+
+        <TextView
+            android:id="@+id/overview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{vm.dataMovieDetail.overview}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/video_trailer" />
+
+        <TextView
+            android:id="@+id/genre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(`Genre: %s`, vm.dataMovieDetail.genres[0].name)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/overview" />
+
+        <TextView
+            android:id="@+id/vote_average"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(`Rating: %.2f`, vm.dataMovieDetail.voteAverage)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/genre" />
+
+        <TextView
+            android:id="@+id/vote_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(`Vote count: %d`, vm.dataMovieDetail.voteCount)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vote_average" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/recycler"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@+id/vote_count"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
