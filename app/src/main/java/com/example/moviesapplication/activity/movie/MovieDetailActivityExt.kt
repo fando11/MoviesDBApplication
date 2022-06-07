@@ -3,6 +3,7 @@ package com.example.moviesapplication.activity.movie
 import android.app.ProgressDialog
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.common.entity.respose.AppResponse
@@ -41,6 +42,7 @@ fun MovieDetailActivity.observeLiveData() = with(vm){
             AppResponse.ERROR -> {
                 dialog?.dismiss()
                 Toast.makeText(this@observeLiveData, "Data Detail Tidak Ada", Toast.LENGTH_SHORT).show()
+                binding.retry.visibility = View.VISIBLE
             }
             AppResponse.SUCCESS -> {
                 dialog?.dismiss()
@@ -60,6 +62,14 @@ fun MovieDetailActivity.observeLiveData() = with(vm){
     dataReview.observe(this@observeLiveData){
         CoroutineScope(Dispatchers.IO).launch {
             adapter.submitData(it)
+        }
+    }
+
+    binding.retry.setOnClickListener {
+        movieId.observe(this@observeLiveData){
+            CoroutineScope(Dispatchers.IO).launch {
+                getMovieDetail(it)
+            }
         }
     }
 

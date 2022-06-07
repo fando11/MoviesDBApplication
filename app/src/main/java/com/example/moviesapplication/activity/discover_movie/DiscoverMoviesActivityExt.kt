@@ -2,10 +2,13 @@ package com.example.moviesapplication.activity.discover_movie
 
 import android.app.ProgressDialog
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.paging.LoadState
 import com.example.moviesapplication.BR
+import com.example.moviesapplication.activity.genre.GenresMovieListActivity
+import com.example.moviesapplication.activity.genre.observeLiveData
 import dagger.android.AndroidInjection
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,15 +33,28 @@ fun DiscoverMoviesActivity.observeLiveData() = with(vm){
             discoverMoviesByGenre(it)
         }
     }
+
     pagingData.observe(this@observeLiveData){
         adapter.addLoadStateListener {
             if(it.refresh is LoadState.Error) {
+                Toast.makeText(this@observeLiveData, "Error", Toast.LENGTH_SHORT).show()
+                binding.retry.visibility = View.VISIBLE
+            }else{
+                binding.retry.visibility = View.GONE
             }
         }
         CoroutineScope(Dispatchers.IO).launch {
             adapter.submitData(it)
         }
 
+    }
+
+    binding.retry.setOnClickListener {
+        genreId.observe(this@observeLiveData){
+            CoroutineScope(Dispatchers.IO).launch {
+                discoverMoviesByGenre(it)
+            }
+        }
     }
 
 

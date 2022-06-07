@@ -2,6 +2,7 @@ package com.example.moviesapplication.activity.genre
 
 import android.app.ProgressDialog
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -31,15 +32,16 @@ fun GenresMovieListActivity.observeLiveData() = with(vm){
             AppResponse.ERROR -> {
                 dialog?.dismiss()
                 Toast.makeText(this@observeLiveData, "error ${it.code.toString()}", Toast.LENGTH_SHORT).show()
-                binding.recycler.isGone
-                binding.retry.isVisible
+                binding.retry.visibility = View.VISIBLE
             }
             AppResponse.SUCCESS -> {
+                binding.retry.visibility = View.GONE
                 adapter.submitData(it.data.orEmpty())
                 dialog?.dismiss()
                 Toast.makeText(this@observeLiveData, "List Genre Ada", Toast.LENGTH_SHORT).show()
             }
             AppResponse.LOADING -> {
+                binding.retry.visibility = View.GONE
                 dialog = ProgressDialog(this@observeLiveData).apply {
                     setCancelable(false)
                     setProgressStyle(ProgressDialog.STYLE_SPINNER)
@@ -48,6 +50,10 @@ fun GenresMovieListActivity.observeLiveData() = with(vm){
                 }
             }
         }
+    }
+
+    binding.retry.setOnClickListener {
+        getGenresMovies()
     }
 
 

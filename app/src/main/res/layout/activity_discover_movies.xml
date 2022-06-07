@@ -20,5 +20,17 @@
             app:spanCount="2">
         </androidx.recyclerview.widget.RecyclerView>
 
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:id="@+id/retry"
+            android:gravity="center"
+            android:text="Retry"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="wrap_content"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
