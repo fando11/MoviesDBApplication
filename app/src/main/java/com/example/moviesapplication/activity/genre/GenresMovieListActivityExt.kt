@@ -3,6 +3,8 @@ package com.example.moviesapplication.activity.genre
 import android.app.ProgressDialog
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.example.common.entity.respose.AppResponse
 import com.example.moviesapplication.BR
@@ -27,9 +29,10 @@ fun GenresMovieListActivity.observeLiveData() = with(vm){
     dataGenre.observe(this@observeLiveData){
         when (it.state) {
             AppResponse.ERROR -> {
-                adapter.submitData(emptyList())
                 dialog?.dismiss()
                 Toast.makeText(this@observeLiveData, "error ${it.code.toString()}", Toast.LENGTH_SHORT).show()
+                binding.recycler.isGone
+                binding.retry.isVisible
             }
             AppResponse.SUCCESS -> {
                 adapter.submitData(it.data.orEmpty())

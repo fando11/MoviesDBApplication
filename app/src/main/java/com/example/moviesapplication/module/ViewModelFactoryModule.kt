@@ -3,8 +3,8 @@ package com.example.bt24.module
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.common.entity.annotation.ViewModelKey
-import com.example.common.entity.ui.ViewModelProviderFactory
+import com.example.common.di.ViewModelKey
+import com.example.common.di.ViewModelProviderFactory
 import com.example.moviesapplication.activity.discover_movie.DiscoverMoviesActivity
 import com.example.moviesapplication.activity.genre.GenresMovieListActivity
 import com.example.moviesapplication.activity.movie.MovieDetailActivity

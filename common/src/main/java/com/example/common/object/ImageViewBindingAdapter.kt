@@ -1,4 +1,4 @@
-package com.cresenta.common.binding_adapter
+package com.example.common.`object`
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter

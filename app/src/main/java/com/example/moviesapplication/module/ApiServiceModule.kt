@@ -2,7 +2,7 @@ package com.example.bt24.module
 
 import android.content.Context
 import com.example.api_service.service.*
-import com.example.common.entity.RetrofitClient
+import com.example.common.`object`.RetrofitClient
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

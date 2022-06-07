@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.paging.LoadState
 import com.example.moviesapplication.BR
 import dagger.android.AndroidInjection
 import kotlinx.coroutines.CoroutineScope
@@ -29,18 +30,13 @@ fun DiscoverMoviesActivity.observeLiveData() = with(vm){
             discoverMoviesByGenre(it)
         }
     }
-    var dialog: ProgressDialog? = null
     pagingData.observe(this@observeLiveData){
+        adapter.addLoadStateListener {
+            if(it.refresh is LoadState.Error) {
+            }
+        }
         CoroutineScope(Dispatchers.IO).launch {
             adapter.submitData(it)
-        }.let {
-            if (it.isActive){
-                dialog?.dismiss()
-                Toast.makeText(this@observeLiveData, "Data List Movie ada", Toast.LENGTH_SHORT).show()
-            }else{
-                dialog?.dismiss()
-                Toast.makeText(this@observeLiveData, "Data List Movie Tidak ada", Toast.LENGTH_SHORT).show()
-            }
         }
 
     }

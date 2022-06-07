@@ -1,4 +1,4 @@
-package com.example.common.entity.ui
+package com.example.common.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

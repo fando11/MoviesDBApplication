@@ -1,6 +1,6 @@
 package com.example.api_service.service
 
-import com.example.common.entity.Constants
+import com.example.common.`object`.Constants
 import com.example.common.entity.movie.movie_detail.MovieDetailResponse
 import retrofit2.Response
 import retrofit2.http.GET

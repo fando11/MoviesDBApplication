@@ -7,7 +7,7 @@
         <variable
             name="data"
             type="com.example.common.entity.movie.movie_review.Result" />
-        <import type="com.example.common.entity.Constants" />
+        <import type="com.example.common.object.Constants" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

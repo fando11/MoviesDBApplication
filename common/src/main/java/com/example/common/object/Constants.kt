@@ -1,4 +1,4 @@
-package com.example.common.entity
+package com.example.common.`object`
 
 object Constants {
     const val BASE_URL = "https://api.themoviedb.org/3/"
