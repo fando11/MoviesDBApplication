@@ -45,10 +45,12 @@ fun MovieDetailActivity.observeLiveData() = with(vm){
                 binding.retry.visibility = View.VISIBLE
             }
             AppResponse.SUCCESS -> {
+                binding.retry.visibility = View.GONE
                 dialog?.dismiss()
                 Toast.makeText(this@observeLiveData, "Data Detail Ada", Toast.LENGTH_SHORT).show()
             }
             AppResponse.LOADING -> {
+                binding.retry.visibility = View.GONE
                 dialog = ProgressDialog(this@observeLiveData).apply {
                     setCancelable(false)
                     setProgressStyle(ProgressDialog.STYLE_SPINNER)

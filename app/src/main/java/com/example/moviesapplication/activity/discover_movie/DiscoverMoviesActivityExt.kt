@@ -37,7 +37,6 @@ fun DiscoverMoviesActivity.observeLiveData() = with(vm){
     pagingData.observe(this@observeLiveData){
         adapter.addLoadStateListener {
             if(it.refresh is LoadState.Error) {
-                Toast.makeText(this@observeLiveData, "Error", Toast.LENGTH_SHORT).show()
                 binding.retry.visibility = View.VISIBLE
             }else{
                 binding.retry.visibility = View.GONE
