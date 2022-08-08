@@ -12,14 +12,13 @@ import javax.inject.Inject
 class GenresMovieListActivity : AppCompatActivity() {
     val layoutResourceId: Int = R.layout.activity_genres_movie_list
     lateinit var binding: ActivityGenresMovieListBinding
-    val adapter = GenreMovieListAdapter(this)
+    val adapter = GenreMovieListAdapter( ::getSelectedGenres)
 
     @Inject
     lateinit var vmFactory: ViewModelProvider.Factory
     val vm : GenresMovieViewModel by viewModels {
         vmFactory
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

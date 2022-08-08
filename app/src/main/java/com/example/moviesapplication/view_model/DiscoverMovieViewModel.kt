@@ -14,14 +14,14 @@ class DiscoverMovieViewModel(
     val discoverMoviePagingUseCase: DiscoverMoviePagingUseCase
 ) : AndroidViewModel(application) {
 
-    val pagingData = MutableLiveData<PagingData<MoviesResult>>()
-    val genreId = MutableLiveData<Int>()
+    val moviePagingData = MutableLiveData<PagingData<MoviesResult>>()
+    val genreIds = MutableLiveData<Array<String>>()
 
 
-    fun discoverMoviesByGenre(genreId: Int) {
+    fun discoverMoviesByGenre(genreIds:Array<String>) {
         viewModelScope.launch {
-            discoverMoviePagingUseCase.invoke(genreId).collect {
-                pagingData.postValue(it)
+            discoverMoviePagingUseCase.invoke(genreIds).collect {
+                moviePagingData.postValue(it)
             }
         }
     }

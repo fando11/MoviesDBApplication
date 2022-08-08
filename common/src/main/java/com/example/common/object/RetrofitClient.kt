@@ -5,9 +5,10 @@ import android.util.Log
 import com.ashokvarma.gander.Gander
 import com.ashokvarma.gander.GanderInterceptor
 import com.ashokvarma.gander.imdb.GanderIMDB
-import com.example.common.interceptor.ConnectivityInterceptor
+//import com.example.common.interceptor.ConnectivityInterceptor
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
+import okhttp3.internal.connection.ConnectInterceptor
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -18,7 +19,6 @@ object RetrofitClient {
         Gander.setGanderStorage(GanderIMDB.getInstance())
         val client = OkHttpClient().newBuilder()
             .addInterceptor(GanderInterceptor(context).showNotification(true))
-            .addInterceptor(ConnectivityInterceptor(context))
             .build()
         return Retrofit.Builder()
             .client(client)

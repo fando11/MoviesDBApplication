@@ -9,19 +9,20 @@ import dependencies.retrofit_okhttp.retrofit
 import org.gradle.api.artifacts.dsl.DependencyHandler
 
 fun DependencyHandler.appLibraries() {
+    recycleView()
     androidCore()
-    materialDesign()
+    gander()
     testUnit()
     androidX()
     vmLifeCycle()
+    materialDesign()
     coroutine()
     gson()
     okHttp()
     retrofit()
     glide()
-//    koinKotlin("3.2.0-beta-1")
-    gander()
     dagger()
     androidPaging()
-    exoPlayer()
+    youtube()
+
 }

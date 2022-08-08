@@ -1,18 +1,17 @@
 package com.example.moviesapplication.activity.genre
 
-import android.content.Context
-import android.content.Intent
+
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.common.entity.genre.Genre
-import com.example.moviesapplication.activity.discover_movie.DiscoverMoviesActivity
 import com.example.moviesapplication.databinding.GenresMovieListItemBinding
 
 class GenreMovieListAdapter(
-    private val context: Context
+    private val getSelectedGenres: () -> ArrayList<Genre>
 ): RecyclerView.Adapter<GenreViewHolder>()  {
     val dataDiffer = AsyncListDiffer<Genre>(this, differGenre)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreViewHolder {
@@ -27,10 +26,23 @@ class GenreMovieListAdapter(
         val data = dataDiffer.currentList[position]
         holder.binding.data = data
         holder.binding.root.setOnClickListener {
-            val intent = Intent(context, DiscoverMoviesActivity::class.java)
-            intent.putExtra("EXTRA_DATA_GENRE_ID", data?.id)
-            context.startActivity(intent)
+            val selectedGenre = getSelectedGenres()
+            if (data in selectedGenre) {
+                selectedGenre.remove(data)
+            } else {
+                selectedGenre.add(data)
+            }
+
+            if (data in getSelectedGenres()) {
+                holder.binding.cardView.setCardBackgroundColor(Color.BLUE)
+                holder.binding.tvGenre.setTextColor(Color.WHITE)
+            } else {
+                holder.binding.cardView.setCardBackgroundColor(Color.WHITE)
+                holder.binding.tvGenre.setTextColor(Color.BLACK)
+            }
         }
+
+
 
     }
 

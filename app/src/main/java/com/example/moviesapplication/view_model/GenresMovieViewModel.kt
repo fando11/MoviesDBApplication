@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+
 import com.example.api_service.usecase.GetGenreUseCase
 import com.example.common.entity.genre.Genre
 import com.example.common.entity.respose.AppResponse
@@ -14,7 +15,9 @@ class GenresMovieViewModel(
     val getGenreUseCase: GetGenreUseCase
 ) : AndroidViewModel(application) {
 
+
     val dataGenre = MutableLiveData<AppResponse<List<Genre>>>()
+    val selectedGenres = ArrayList<Genre>()
 
     init{
         getGenresMovies()

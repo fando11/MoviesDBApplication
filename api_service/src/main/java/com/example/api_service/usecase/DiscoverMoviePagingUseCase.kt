@@ -7,7 +7,7 @@ import com.example.api_service.service.DiscoverMovieService
 class DiscoverMoviePagingUseCase(
     val discoverMovieService: DiscoverMovieService
 ) {
-    operator fun invoke(genreId: Int) = DiscoverMovieDataSource.createPager(
-        10,discoverMovieService,genreId
+    operator fun invoke(genreIds: Array<String>) = DiscoverMovieDataSource.createPager(
+        10,discoverMovieService,genreIds
     ).flow
 }

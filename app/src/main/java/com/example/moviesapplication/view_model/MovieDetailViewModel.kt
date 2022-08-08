@@ -28,8 +28,8 @@ class MovieDetailViewModel (
     fun getMovieDetail(movieId:Int){
         viewModelScope.launch {
             movieDetailUseCase.invoke(movieId).collect{
-                dataMovieDetail.postValue(it.data)
-                videoId.postValue(it.data2?.results?.last()?.key?.ifEmpty { "ZWcRmoLqhkc" })
+                dataMovieDetail.postValue(it.data?.first)
+                videoId.postValue(it.data?.second?.results?.last()?.key?.ifEmpty { "ZWcRmoLqhkc" })
                 state.postValue(it.state)
             }
             movieReviewPagingUseCase.invoke(movieId).cachedIn(viewModelScope).collect{

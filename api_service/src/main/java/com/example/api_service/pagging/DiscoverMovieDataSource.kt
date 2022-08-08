@@ -9,7 +9,7 @@ import com.example.common.entity.discover_movie.Result as MoviesResult
 
 class DiscoverMovieDataSource(
     private val discoverMovieService: DiscoverMovieService,
-    private val genreId: Int
+    private val genreIds: Array<String>
 ) : PagingSource<Int, MoviesResult>() {
     override fun getRefreshKey(state: PagingState<Int, MoviesResult>): Int? {
         return null
@@ -19,7 +19,7 @@ class DiscoverMovieDataSource(
         val page = params.key ?: 1
         val prevPage = if (page == 1) null else page - 1
         try {
-            val data = discoverMovieService.getMovieDiscover(genreId.toString(), page)
+            val data = discoverMovieService.getMovieDiscover(genreIds.joinToString(separator = ","), page)
             if(data.isSuccessful){
                 data.body()?.let {
                     val nextPage = if (it.results.isEmpty()) null else page + 1
@@ -39,11 +39,11 @@ class DiscoverMovieDataSource(
         fun createPager(
             pageSize: Int,
             discoverMovieService: DiscoverMovieService,
-            genreId: Int
+            genreIds: Array<String>
         ) = Pager(
             PagingConfig(pageSize), null
         ){
-            DiscoverMovieDataSource(discoverMovieService,genreId)
+            DiscoverMovieDataSource(discoverMovieService,genreIds)
         }
     }
 

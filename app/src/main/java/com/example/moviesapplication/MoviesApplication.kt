@@ -10,5 +10,6 @@ class MoviesApplication : DaggerApplication() {
             .builder()
             .app(this)
             .build()
+
     }
 }

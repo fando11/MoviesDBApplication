@@ -14,8 +14,6 @@ import com.example.common.entity.discover_movie.Result as MoviesResult
 class DiscoverMoviesAdapter(private val context: Context
 ): PagingDataAdapter<MoviesResult, DiscoverMovieViewHolder>(diffCallback) {
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiscoverMovieViewHolder {
         return DiscoverMovieViewHolder(
             DiscoverMoviesItemBinding.inflate(
@@ -41,7 +39,7 @@ class DiscoverMoviesAdapter(private val context: Context
             }
 
             override fun areContentsTheSame(oldItem: MoviesResult, newItem: MoviesResult): Boolean {
-                return oldItem == newItem
+                return true
             }
 
         }
